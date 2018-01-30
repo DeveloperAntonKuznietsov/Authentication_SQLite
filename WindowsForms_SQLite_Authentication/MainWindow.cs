@@ -16,5 +16,11 @@ namespace WindowsForms_SQLite_Authentication
         {
             InitializeComponent();
         }
+
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
+            Login login = new Login();
+            login.ShowDialog();
+        }
     }
 }

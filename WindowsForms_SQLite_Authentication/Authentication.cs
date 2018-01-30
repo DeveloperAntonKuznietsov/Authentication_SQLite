@@ -1,45 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Data.SQLite;
 
 namespace WindowsForms_SQLite_Authentication
 {
-    public partial class Authentication : Form
+    
+
+    public class Authentication
     {
-        MainWindow mainWindow = new MainWindow();
-        Registration registration = new Registration();
-        public Authentication()
+        public string connectionString { get; set; }//privat
+
+        public void GetConnection()
         {
-            InitializeComponent();
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            string connection = @"Data Source = Account.db; Version=3";
+            connectionString = connection;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        public void CreateDataBase()// проверка на наличие файла
         {
+            if (!File.Exists("Account.db"))
+            {
+                File.Create("Account.db");
 
-        }
+                GetConnection();
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                {
+                    SQLiteCommand cmd = new SQLiteCommand();
+                    connection.Open();
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void btnRegister_Click(object sender, EventArgs e)
-        {
-            registration.ShowDialog();
-
-        }
-
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
-            mainWindow.Show();
-            this.Hide();
+                    string query = @"CREATE TABLE Akun (ID INTEGER PRIMARY KEY AUTOINCREMENT,UsernameText(25),Pasword Text(25), Email Text (35))";
+                    cmd.CommandText = query;
+                    cmd.Connection = connection;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            else return;
         }
     }
 }
