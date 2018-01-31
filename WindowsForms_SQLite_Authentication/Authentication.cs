@@ -13,10 +13,11 @@ namespace WindowsForms_SQLite_Authentication
     public class Authentication
     {
         public string connectionString { get; set; }//privat
+        string connection;
 
         public void GetConnection()
         {
-            string connection = @"Data Source = Account.db; Version=3";
+            connection = @"Data Source = Account.db; Version=3";
             connectionString = connection;
         }
 
@@ -26,19 +27,23 @@ namespace WindowsForms_SQLite_Authentication
             {
                 File.Create("Account.db");
 
-                GetConnection();
-                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
-                {
-                    SQLiteCommand cmd = new SQLiteCommand();
-                    connection.Open();
-
-                    string query = @"CREATE TABLE Akun (ID INTEGER PRIMARY KEY AUTOINCREMENT,UsernameText(25),Pasword Text(25), Email Text (35))";
-                    cmd.CommandText = query;
-                    cmd.Connection = connection;
-                    cmd.ExecuteNonQuery();
-                }
+                CreateTable();
             }
-            else return;
+            else return; //CreateTable();
+        }
+        private void CreateTable()
+        {
+            GetConnection();
+            using (SQLiteConnection connect = new SQLiteConnection(connection))
+            {
+                connect.Open();
+                SQLiteCommand cmd = new SQLiteCommand();
+
+                string query = @"CREATE TABLE Akun (ID INTEGER PRIMARY KEY AUTOINCREMENT,Username Text(25),Password Text(25), Email Text (35))";
+                cmd.CommandText = query;
+                cmd.Connection = connect;
+                cmd.ExecuteNonQuery();
+            }
         }
     }
 }

@@ -42,6 +42,10 @@ namespace WindowsForms_SQLite_Authentication
                 {
                     CheckAccount(txtUserName.Text);
                 }
+                else
+                {
+                    MessageBox.Show("Пароли не совпадают");
+                }
             }
         }
 
@@ -60,8 +64,48 @@ namespace WindowsForms_SQLite_Authentication
                 string query = @"SELECT * FROM Akun WHERE Username= '"+username+"'";
                 cmd.CommandText = query;
                 cmd.Connection = sqlconnection;
-            }
 
+
+                SQLiteDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    count++;
+                }
+                if (count == 1)
+                {
+                    MessageBox.Show("Учетная запись уже создана", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else if (count==0)
+                {
+                    InsertData(txtUserName.Text, txtPassword.Text, txtAddress.Text);
+                }
+            }
+        }  
+         
+        private void InsertData(string usernames, string password, string email)
+        {
+            authentication = new Authentication();
+            authentication.GetConnection();
+
+            using (SQLiteConnection sqlcon = new SQLiteConnection(authentication.connectionString))
+            {
+                sqlcon.Open();
+                SQLiteCommand cmd = new SQLiteCommand();
+
+                string query = @"INSERT INTO Akun(Username, Password, Email) VALUES (@username, @password, @email)";
+
+                cmd.CommandText = query;
+                cmd.Connection = sqlcon;
+                cmd.Parameters.Add(new SQLiteParameter("@username", usernames));
+                cmd.Parameters.Add(new SQLiteParameter("@password", password));
+                cmd.Parameters.Add(new SQLiteParameter("@email", email));
+
+                cmd.ExecuteNonQuery();
+
+                MessageBox.Show("Успешно создана учетная запись!", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.Close();
+            }
         }
     }
 }

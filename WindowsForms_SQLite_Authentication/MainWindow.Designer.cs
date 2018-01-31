@@ -34,12 +34,13 @@
             // 
             // lblWellcome
             // 
-            this.lblWellcome.AutoSize = true;
-            this.lblWellcome.Location = new System.Drawing.Point(45, 77);
+            this.lblWellcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblWellcome.Location = new System.Drawing.Point(-3, 100);
             this.lblWellcome.Name = "lblWellcome";
-            this.lblWellcome.Size = new System.Drawing.Size(57, 13);
+            this.lblWellcome.Size = new System.Drawing.Size(287, 28);
             this.lblWellcome.TabIndex = 0;
             this.lblWellcome.Text = "Wellcome,";
+            this.lblWellcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainWindow
             // 
@@ -53,7 +54,6 @@
             this.Text = "MainWindow";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

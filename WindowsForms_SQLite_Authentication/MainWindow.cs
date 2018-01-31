@@ -16,11 +16,14 @@ namespace WindowsForms_SQLite_Authentication
         {
             InitializeComponent();
         }
-
+        string username;
         private void MainWindow_Load(object sender, EventArgs e)
         {
             Login login = new Login();
             login.ShowDialog();
+
+            username = login.usernames;
+            lblWellcome.Text = "Wellcome, " + username + " !";
         }
     }
 }
