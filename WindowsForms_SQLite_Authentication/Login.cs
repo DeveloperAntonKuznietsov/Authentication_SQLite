@@ -47,6 +47,7 @@ namespace WindowsForms_SQLite_Authentication
                 txtPassword.Text != "")
             {
                 checkAccount(txtUserName.Text,txtPassword.Text);
+                MainWindow mainWindow = new MainWindow();
             }
 
             else
@@ -89,11 +90,6 @@ namespace WindowsForms_SQLite_Authentication
                     return;
                 }
             }
-        }
-
-        private void Login_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
         }
     }
 }
