@@ -30,7 +30,8 @@ namespace WindowsForms_SQLite_Authentication
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit();
+            
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
@@ -39,7 +40,7 @@ namespace WindowsForms_SQLite_Authentication
             registration.ShowDialog();
 
         }
-
+        
         private void btnLogin_Click(object sender, EventArgs e)
         {
             if (txtUserName.Text!=""&&
@@ -77,6 +78,7 @@ namespace WindowsForms_SQLite_Authentication
 
                 if (count == 1)
                 {
+
                     MessageBox.Show("Успешно", "Login Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     usernames = username;
                     this.Close();
@@ -87,6 +89,11 @@ namespace WindowsForms_SQLite_Authentication
                     return;
                 }
             }
+        }
+
+        private void Login_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
