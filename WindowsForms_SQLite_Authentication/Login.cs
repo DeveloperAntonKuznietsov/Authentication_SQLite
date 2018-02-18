@@ -91,5 +91,26 @@ namespace WindowsForms_SQLite_Authentication
                 }
             }
         }
+
+        private void btnLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+           
+                if (e.KeyCode == Keys.Enter)
+            {
+                if (txtUserName.Text != "" &&
+                txtPassword.Text != "")
+                {
+                    checkAccount(txtUserName.Text, txtPassword.Text);
+                    MainWindow mainWindow = new MainWindow();
+                }
+
+                else
+                {
+                    MessageBox.Show("Неверный логин или пароль", "Ошибочка");
+                }
+            }
+                   
+            
+        }
     }
 }
