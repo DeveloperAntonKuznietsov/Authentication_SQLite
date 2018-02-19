@@ -29,7 +29,7 @@ namespace WindowsForms_SQLite_Authentication
 
                 CreateTable();
             }
-            else return; //CreateTable();
+            else CreateTable(); //CreateTable();если такой файл есть то просто создать таблицу
         }
         private void CreateTable()
         {
