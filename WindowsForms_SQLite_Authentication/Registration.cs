@@ -61,7 +61,7 @@ namespace WindowsForms_SQLite_Authentication
                 sqlconnection.Open();
 
                 int count = 0;
-                string query = @"SELECT * FROM Akun WHERE Username= '"+username+"'";
+                string query = @"SELECT * FROM Users WHERE Username= '" + username+"'";
                 cmd.CommandText = query;
                 cmd.Connection = sqlconnection;
 
@@ -92,7 +92,7 @@ namespace WindowsForms_SQLite_Authentication
                 sqlcon.Open();
                 SQLiteCommand cmd = new SQLiteCommand();
 
-                string query = @"INSERT INTO Akun(Username, Password, Email) VALUES (@username, @password, @email)";
+                string query = @"INSERT INTO Users(Username, Password, Email) VALUES (@username, @password, @email)";
 
                 cmd.CommandText = query;
                 cmd.Connection = sqlcon;
@@ -106,6 +106,11 @@ namespace WindowsForms_SQLite_Authentication
 
                 this.Close();
             }
+        }
+
+        private void Registration_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

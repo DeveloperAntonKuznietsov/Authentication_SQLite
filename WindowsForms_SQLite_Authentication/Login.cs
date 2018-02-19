@@ -65,7 +65,7 @@ namespace WindowsForms_SQLite_Authentication
             {
                 connection.Open();
                 SQLiteCommand cmd = new SQLiteCommand();
-                string query = @"SELECT * FROM Akun WHERE Username ='" + username + "' and Password ='" + password+ "'";
+                string query = @"SELECT * FROM Users WHERE Username ='" + username + "' and Password ='" + password+ "'";
 
                 int count = 0;
                 cmd.CommandText = query;

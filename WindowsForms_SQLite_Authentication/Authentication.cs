@@ -29,7 +29,7 @@ namespace WindowsForms_SQLite_Authentication
 
                 CreateTable();
             }
-            else CreateTable(); //CreateTable();если такой файл есть то просто создать таблицу
+            else CreateTable(); //CreateTable();если такой файл 
         }
         private void CreateTable()
         {
@@ -39,7 +39,7 @@ namespace WindowsForms_SQLite_Authentication
                 connect.Open();
                 SQLiteCommand cmd = new SQLiteCommand();
 
-                string query = @"CREATE TABLE Akun (ID INTEGER PRIMARY KEY AUTOINCREMENT,Username Text(25),Password Text(25), Email Text (35))";
+                string query = @"CREATE TABLE Users (ID INTEGER PRIMARY KEY AUTOINCREMENT,Username Text(25),Password Text(25), Email Text (35))";
                 cmd.CommandText = query;
                 cmd.Connection = connect;
                 cmd.ExecuteNonQuery();
