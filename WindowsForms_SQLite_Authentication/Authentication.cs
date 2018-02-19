@@ -14,7 +14,7 @@ namespace WindowsForms_SQLite_Authentication
     {
         public string connectionString { get; set; }//privat
         string connection;
-
+       
         public void GetConnection()
         {
             connection = @"Data Source = Account.db; Version=3";
@@ -26,10 +26,11 @@ namespace WindowsForms_SQLite_Authentication
             if (!File.Exists("Account.db"))
             {
                 File.Create("Account.db");
-
-                CreateTable();
             }
-            else CreateTable(); //CreateTable();если такой файл 
+            byte[] v = File.ReadAllBytes("Account.db");
+            if (v.Length==0) { CreateTable(); }
+            else return; //CreateTable();если такой файл 
+
         }
         private void CreateTable()
         {
