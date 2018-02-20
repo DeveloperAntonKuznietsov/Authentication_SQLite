@@ -14,7 +14,8 @@ namespace WindowsForms_SQLite_Authentication
     {
         public string connectionString { get; set; }//privat
         string connection;
-       
+        Stream myStream;//создать файл в одтельном потоке иначе не будет к нему доступа при первом создании
+
         public void GetConnection()
         {
             connection = @"Data Source = Account.db; Version=3";
@@ -25,10 +26,11 @@ namespace WindowsForms_SQLite_Authentication
         {
             if (!File.Exists("Account.db"))
             {
-                File.Create("Account.db");
+               myStream= File.Create("Account.db");
+                myStream.Close();//обязательно закрыть поток что б освободить доступ без этого при первом запуске ничего не получется
             }
             byte[] v = File.ReadAllBytes("Account.db");
-            if (v.Length==0) { CreateTable(); }
+            if (v.Length==0) { CreateTable(); }//так я проверяю на наличие таблицы в бд что б не писать длинный код
             else return; //CreateTable();если такой файл 
 
         }
